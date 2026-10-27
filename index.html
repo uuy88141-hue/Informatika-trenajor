@@ -1,0 +1,260 @@
+index.html
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trenajor: uzluksiz ta’limda informatika</title>
+<style>
+:root{--bg:#fff;--fg:#1b1740;--mut:#5a5e86;--card:#f1effe;--line:#d9d4f7;--acc:#6c4ce0;--ok:#0b8f7f;--bad:#e5484d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14122e;--fg:#f1effe;--mut:#a9acd0;--card:#221e4d;--line:#3a3570;--acc:#8f78ff;--ok:#2cc5b1;--bad:#ff7a7f}}
+:root[data-theme="dark"]{--bg:#14122e;--fg:#f1effe;--mut:#a9acd0;--card:#221e4d;--line:#3a3570;--acc:#8f78ff;--ok:#2cc5b1;--bad:#ff7a7f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Calibri,Arial,sans-serif;font-size:17px;line-height:1.45}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 40px}
+h2{font-family:Cambria,Georgia,serif;margin:0 0 8px}
+.top{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#6c4ce0,#c04cff);color:#fff;border-radius:18px;padding:10px 14px;margin-bottom:14px}
+.top .nm{flex:1;min-width:0}.top b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xp{height:8px;background:rgba(255,255,255,.3);border-radius:8px;overflow:hidden;margin-top:4px}.xp i{display:block;height:100%;background:#ffb703}
+.home{background:rgba(255,255,255,.22);color:#fff;border:0;border-radius:12px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
+.say{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.bub{background:var(--card);border-radius:16px;padding:12px 14px;flex:1}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{border:0;border-radius:18px;padding:16px 14px;color:#fff;text-align:left;font:inherit;cursor:pointer;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 12px rgba(27,23,64,.2)}
+.tile .em{font-size:36px;line-height:1}.tile b{font-size:19px;display:block}.tile span{font-size:14px;opacity:.95}
+.t1{background:linear-gradient(135deg,#ea580c,#f59e0b)}.t2{background:linear-gradient(135deg,#6c4ce0,#3b82f6)}.t3{background:linear-gradient(135deg,#0b8f7f,#22b8a5)}
+.t4{background:linear-gradient(135deg,#d6336c,#ff6b6b)}.t5{background:linear-gradient(135deg,#7c3aed,#db2777);grid-column:1/-1;min-height:100px}
+.box{background:var(--card);border-radius:18px;padding:18px}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.bar.tm i{background:linear-gradient(90deg,#ffb703,#e5484d);transition:width 1s linear}
+.meta{display:flex;justify-content:space-between;color:var(--mut);font-size:14px;margin-bottom:8px}
+.flash{min-height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-radius:18px;padding:22px;cursor:pointer;margin-bottom:14px;color:#fff;background:linear-gradient(135deg,#6c4ce0,#3b82f6)}
+.flash.back{background:linear-gradient(135deg,#0b8f7f,#22b8a5)}
+.flash .em{font-size:60px;line-height:1.1}.flash .t{font-family:Cambria,Georgia,serif;font-size:26px;font-weight:700}.flash .d{font-size:20px}.flash small{opacity:.9;margin-top:10px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{flex:1;min-width:120px;padding:12px;border:0;border-radius:12px;font:inherit;font-weight:700;cursor:pointer;background:#6c4ce0;color:#fff}
+.btn.sec{background:var(--bg);color:var(--fg);border:2px solid var(--line)}.btn.ok{background:var(--ok);color:#fff}.btn:disabled{opacity:.4;cursor:default}
+.q{font-size:20px;font-weight:700;margin:0 0 12px}
+.opt{display:block;width:100%;text-align:left;margin-bottom:10px;padding:13px 14px;border:2px solid var(--line);background:var(--bg);color:var(--fg);border-radius:12px;font:inherit;cursor:pointer}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,var(--bg))}.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 20%,var(--bg))}
+.fb{margin:6px 0 12px;font-weight:700}
+.big{font-family:Cambria,Georgia,serif;font-size:46px;font-weight:700;text-align:center;margin:4px 0}
+.c{text-align:center}
+.slots,.pool{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.slot{min-height:46px;border:2px dashed var(--line);border-radius:12px;padding:9px 12px;display:flex;gap:10px;align-items:center;background:var(--bg)}
+.slot b{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+.slot.right{border:2px solid var(--ok)}.slot.wrong{border:2px solid var(--bad)}
+.chip{padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;text-align:left;cursor:pointer}.chip:disabled{opacity:.3;cursor:default}
+.mini{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}.mini button{flex:1;min-width:100px;padding:8px;border:2px solid var(--line);background:var(--bg);color:var(--fg);border-radius:10px;font:inherit;font-weight:700;cursor:pointer}.mini button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+input{width:100%;padding:13px;border:2px solid var(--line);border-radius:12px;font:inherit;background:var(--bg);color:var(--fg);margin-bottom:10px}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0}
+.bd{background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center;font-size:14px}.bd .e{font-size:30px}.bd.off{opacity:.4;filter:grayscale(1)}
+.cert{border:4px solid #f5b301;border-radius:18px;padding:18px;text-align:center;background:linear-gradient(135deg,#fffbe8,#f1effe);color:#1b1740;margin:12px 0}
+.cert h2{color:#6c4ce0;letter-spacing:3px;margin:0}.cert .nm{font-family:Cambria,Georgia,serif;font-size:28px;font-weight:700;margin:8px 0}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:#1b1740;color:#ffb703;padding:10px 16px;border-radius:14px;font-weight:700;z-index:20;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.cf{position:fixed;top:-20px;width:10px;height:14px;z-index:15;animation:fall 2.6s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+@media (prefers-reduced-motion:reduce){.cf{display:none}}
+.list{padding-left:20px;margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap"><div id="app"></div></div>
+<script>
+const CARDS=[
+["🔗","Uzluksiz ta’lim","Maktabgacha ta’limdan malaka oshirishgacha bo‘lgan yagona, uzilishsiz ta’lim zanjiri."],
+["🪜","Uzviylik","Har bir bosqich oldingisiga tayanadi, bo‘shliq va takror bo‘lmaydi."],
+["🌀","Spiralsimonlik","Tushuncha har bosqichda yangi chuqurlikda qaytib keladi (J. Bruner g‘oyasi)."],
+["👶","Yoshga moslik","Murakkablik o‘quvchining yoshi va tayyorgarligiga mos ravishda oshadi."],
+["🧩","Integratsiya","Informatika matematika, fizika va tillar bilan bog‘lanadi."],
+["🤖","Unplugged metodi","Algoritmni kompyutersiz, o‘yin orqali o‘rgatish."],
+["🎨","Blokli dasturlash","Rangli bloklarni sudrab dastur tuzish (masalan, Scratch). Sintaksis xatosi bo‘lmaydi."],
+["🔄","Teskari sinf","Yangi mavzu uyda video orqali o‘rganiladi, sinfda amaliyot bajariladi."],
+["👥","Juftlikda dasturlash","Haydovchi kodni yozadi, navigator tekshiradi, ular o‘rin almashadi."],
+["🎮","Gamifikatsiya","O‘yin elementlari (ball, reyting, nishon) bilan motivatsiya berish. Kahoot, Wordwall, Quizizz."],
+["🌍","DigComp","Yevropa Ittifoqining raqamli kompetensiyalar doirasi: 5 yo‘nalish."],
+["📁","Raqamli portfolio","O‘quvchi ishlari maktabdan oliy ta’limgacha bitta profilda to‘planadi."],
+["💭","Refleksiya","Dars oxirida: nimani o‘rgandim, nima qiyin bo‘ldi?"],
+["⏱️","45 daqiqalik dars","Motivatsiya 5, yangi mavzu 10, amaliyot 20, mustahkamlash 5, refleksiya 5 daqiqa."]
+];
+const QUIZ=[
+["Spiral modelida mavzu qanday o‘rganiladi?","Har bosqichda chuqurroq qaytib","Faqat bir marta","Faqat oliy ta’limda"],
+["Uzluksiz ta’limning asosiy g‘oyasi nima?","Bosqichlar o‘rtasida uzviylik","Faqat maktabda o‘qish","Imtihonlarni ko‘paytirish"],
+["Boshlang‘ich sinfda algoritm qanday beriladi?","Robot-o‘yin va buyruqlar orqali","Murakkab kod yozdirib","Faqat nazariy ta’rif bilan"],
+["Teskari sinfda yangi mavzu qayerda o‘rganiladi?","Uyda, video orqali","Sinfda, doskada","Imtihon vaqtida"],
+["Juftlikda dasturlashda kodni kim yozadi?","Haydovchi","Navigator","O‘qituvchi"],
+["Blokli dasturlashning afzalligi nima?","Sintaksis xatosi bo‘lmaydi","Kompyuter kerak emas","Faqat oliy ta’limga mos"],
+["DigComp nechta asosiy yo‘nalishdan iborat?","5","3","10"],
+["Kahoot, Wordwall, Quizizz qaysi metodga mos?","Gamifikatsiya","Unplugged","Teskari sinf"],
+["Namunaviy darsda eng ko‘p vaqt nimaga ajratiladi?","Amaliyotga (20 daqiqa)","Motivatsiyaga","Refleksiyaga"],
+["Unplugged metodining mohiyati nima?","Kompyutersiz, o‘yin orqali o‘rgatish","Faqat internet orqali o‘qitish","Faqat test yechish"],
+["Dars oxiridagi refleksiya nima uchun kerak?","O‘quvchi o‘rganganini anglashi uchun","Baho qo‘yish uchun","Vaqtni to‘ldirish uchun"],
+["Uzluksiz raqamli portfolio nimani bildiradi?","Ishlar bitta profilda to‘planishi","Faqat bitta darsdagi ish","Qog‘oz papka"],
+["Python odatda qaysi sinflarda o‘rgatiladi (taqdimot bo‘yicha)?","8–11-sinf","Maktabgacha","1-sinf"]
+];
+const ORDERS=[
+["Ta’lim bosqichlari","Bosqichlarni kichikdan kattaga tartiblang",["Maktabgacha","Boshlang‘ich","Umumiy o‘rta","Kasb-hunar, litsey","Oliy ta’lim","Malaka oshirish"]],
+["Dars bosqichlari","Dars bosqichlarini to‘g‘ri tartiblang",["Motivatsiya (5 daq)","Yangi mavzu (10 daq)","Amaliyot (20 daq)","Mustahkamlash (5 daq)","Refleksiya (5 daq)"]],
+["Algoritm spirali","«Algoritm» chuqurlashish tartibi",["Robot-o‘yin","Scratch: sikl va shart","Python: funksiyalar","Murakkab algoritmlar"]]
+];
+const BADGES=[
+["🚀","Birinchi qadam","Birinchi XP ni to‘pla",()=>S.xp>0],
+["🃏","Kartochka ustasi","Barcha 14 kartochkani bil",()=>S.cb>=14],
+["💯","A’lochi","Testda 10/10 ol",()=>S.bd.perfect],
+["⚡","Tezkor","5 soniyada 3 ta to‘g‘ri javob",()=>S.bd.fast],
+["🧩","Tartib sevar","3 ta tartiblash mashqi",()=>Object.keys(S.ord).length>=3],
+["🛠️","Xatolar ustozi","Xatolar daftaridan to‘g‘ri yech",()=>S.bd.fix],
+["🔥","Seriya","3 kun ketma-ket mashq qil",()=>S.streak>=3]
+];
+const KEY="trenajor2";
+let S={name:"",sur:"",xp:0,cb:0,qb:0,ord:{},streak:0,last:"",bd:{},mist:[]};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let tm=null;const stopT=()=>{if(tm){clearInterval(tm);tm=null}};
+const cap=s=>s.trim().charAt(0).toUpperCase()+s.trim().slice(1);
+const dkey=d=>d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+
+function mascot(sz,mood){
+  const mouth=mood==="sad"?"M20 40 Q28 33 36 40":"M20 36 Q28 44 36 36";
+  return `<svg width="${sz}" height="${sz}" viewBox="0 0 56 56" aria-hidden="true"><line x1="28" y1="4" x2="28" y2="11" stroke="#ffb703" stroke-width="3"/><circle cx="28" cy="4" r="3.5" fill="#ffb703"/><rect x="6" y="11" width="44" height="38" rx="12" fill="#8f78ff"/><rect x="2" y="24" width="5" height="12" rx="2.5" fill="#6c4ce0"/><rect x="49" y="24" width="5" height="12" rx="2.5" fill="#6c4ce0"/><circle cx="20" cy="27" r="6" fill="#fff"/><circle cx="36" cy="27" r="6" fill="#fff"/><circle cx="21" cy="28" r="3" fill="#1b1740"/><circle cx="37" cy="28" r="3" fill="#1b1740"/><path d="${mouth}" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
+}
+function medal(c,sz,crown){
+  return `<svg width="${sz}" height="${sz}" viewBox="0 0 80 90" aria-hidden="true"><path d="M22 2h14l8 30H30z" fill="#e5484d"/><path d="M58 2H44l-8 30h14z" fill="#3b82f6"/><circle cx="40" cy="56" r="28" fill="${c}"/><circle cx="40" cy="56" r="21" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3"/><path d="M40 40l5 11 12 1-9 8 3 12-11-7-11 7 3-12-9-8 12-1z" fill="#fff"/>${crown?'<path d="M26 20l6 7 8-10 8 10 6-7-3 14H29z" fill="#ffb703" stroke="#fff" stroke-width="1.5"/>':""}</svg>`;
+}
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2400)}
+function confetti(){const cs=["#6c4ce0","#ffb703","#e5484d","#0b8f7f","#3b82f6","#ec4899"];for(let i=0;i<46;i++){const d=document.createElement("div");d.className="cf";d.style.left=Math.random()*100+"vw";d.style.background=cs[i%6];d.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),3600)}}
+function checkBadges(){const had=S.bd.seen||{};BADGES.forEach((b,i)=>{if(b[3]()&&!had[i]){had[i]=1;toast("Yangi nishon: "+b[0]+" "+b[1])}});S.bd.seen=had;save()}
+
+function mastery(){return Math.round(40*S.qb/10+30*S.cb/14+30*Object.keys(S.ord).length/3)}
+function tier(m){
+  if(m>=90)return{n:"Metodika ustasi",c:"#f5b301",crown:1,msg:"Mavzuni mukammal o‘zlashtirdingiz. Himoyaga to‘liq tayyorsiz!"};
+  if(m>=70)return{n:"Bilimdon",c:"#9aa3b5",msg:"Juda yaxshi natija. Bir oz mashq bilan oltin kubokka erishasiz."};
+  if(m>=45)return{n:"Izlanuvchi",c:"#cd7f32",msg:"Yaxshi boshlang‘ich. Kartochka va xatolar daftarini takrorlang."};
+  return{n:"Yangi boshlovchi",c:"#7c8cff",msg:"Hali boshlanishi. Kartochkalardan boshlang, keyin testga o‘ting."};
+}
+function bar(){
+  const lvl=Math.floor(S.xp/100)+1;
+  return `<div class="top">${mascot(40,"happy")}<div class="nm"><b>${S.sur} ${S.name}</b><small>${lvl}-daraja · ${S.xp} XP · 🔥 ${S.streak} kun</small><div class="xp"><i style="width:${S.xp%100}%"></i></div></div><button class="home" id="hm">Bosh sahifa</button></div>`;
+}
+function bindHome(){const h=$("hm");if(h)h.onclick=hub}
+
+// ---------- Start ----------
+function start(){
+  stopT();
+  $("app").innerHTML=`<div class="box c">${mascot(110,"happy")}<h2>Informatika trenajori</h2><p style="color:var(--mut)">29-mavzu: uzluksiz ta’lim tizimida informatika fanining mazmuni va o‘qitish metodlari</p>
+  <input id="fam" placeholder="Familiyangiz" autocomplete="family-name"><input id="ism" placeholder="Ismingiz" autocomplete="given-name"><div class="fb" id="er" style="color:var(--bad)"></div>
+  <button class="btn" id="go" style="width:100%">Boshlash 🚀</button></div>`;
+  $("go").onclick=()=>{const a=$("fam").value.trim(),b=$("ism").value.trim();if(!a||!b){$("er").textContent="Familiya va ismni kiriting.";return}
+    S.sur=cap(a);S.name=cap(b);save();hub()};
+}
+// ---------- Hub ----------
+function hub(){
+  stopT();
+  const t=new Date(),y=new Date(t.getTime()-864e5);
+  if(S.last!==dkey(t)){S.streak=S.last===dkey(y)?S.streak+1:1;S.last=dkey(t);save()}
+  const od=Object.keys(S.ord).length,m=mastery();
+  const msg=S.xp===0?`Salom, ${S.name}! Men Robo-ustozman. Kartochkalardan boshlaymizmi?`:`Qaytganingiz yaxshi, ${S.name}! O‘zlashtirish: ${m}%. Davom etamizmi?`;
+  $("app").innerHTML=bar()+`<div class="say">${mascot(64,"happy")}<div class="bub">${msg}</div></div>
+  <div class="grid">
+  <button class="tile t1" data-g="c"><span class="em">🃏</span><div><b>Kartochkalar</b><span>${S.cb}/14 o‘zlashtirilgan</span></div></button>
+  <button class="tile t2" data-g="q"><span class="em">⏱️</span><div><b>Vaqtli test</b><span>Eng yaxshi: ${S.qb}/10</span></div></button>
+  <button class="tile t3" data-g="o"><span class="em">🧩</span><div><b>Tartiblash</b><span>${od}/3 bajarilgan</span></div></button>
+  <button class="tile t4" data-g="m"><span class="em">🛠️</span><div><b>Xatolar daftari</b><span>${S.mist.length} ta savol</span></div></button>
+  <button class="tile t5" data-g="r"><span class="em">🏆</span><div><b>Mukofotlar va sertifikat</b><span>Nishonlar, kubok, sertifikat</span></div></button></div>`;
+  bindHome();checkBadges();
+  document.querySelectorAll(".tile").forEach(b=>b.onclick=()=>({c:()=>cards(),q:()=>runQuiz(sh(QUIZ.map((_,i)=>i)).slice(0,10),"quiz"),o:()=>orders(),m:mistakes,r:rewards}[b.dataset.g]()));
+}
+// ---------- Cards ----------
+function cards(){
+  stopT();let deck=sh(CARDS.map((_,i)=>i)),ci=0,flip=false,known=0;
+  const draw=()=>{
+    if(ci>=deck.length){S.cb=Math.max(S.cb,known);save();if(known>=10)confetti();checkBadges();
+      $("app").innerHTML=bar()+`<div class="box c">${mascot(80,known>=10?"happy":"sad")}<div class="big">${known}/${deck.length}</div><p>Bilaman deb belgilangan kartochkalar.</p><div class="row"><button class="btn" id="a">Qaytadan</button><button class="btn sec" id="h">Bosh sahifa</button></div></div>`;
+      bindHome();$("a").onclick=cards;$("h").onclick=hub;return}
+    const c=CARDS[deck[ci]];
+    $("app").innerHTML=bar()+`<div class="box"><div class="meta"><span>Kartochka ${ci+1}/${deck.length}</span><span>Bilaman: ${known}</span></div><div class="bar"><i style="width:${ci/deck.length*100}%"></i></div>
+    <div class="flash ${flip?"back":""}" id="fl">${flip?`<div class="em">${c[0]}</div><div class="d">${c[2]}</div>`:`<div class="em">${c[0]}</div><div class="t">${c[1]}</div><small>Ta’rifni ko‘rish uchun bosing</small>`}</div>
+    <div class="row"><button class="btn sec" id="rp">Takrorlayman</button><button class="btn ok" id="kn">Bilaman +3 XP</button></div></div>`;
+    bindHome();$("fl").onclick=()=>{flip=!flip;draw()};$("rp").onclick=()=>{flip=false;ci++;draw()};
+    $("kn").onclick=()=>{known++;S.xp+=3;save();flip=false;ci++;draw()};
+  };draw();
+}
+// ---------- Quiz ----------
+function runQuiz(list,mode){
+  stopT();let qi=0,sc=0,combo=0,fast=0,hint=true;
+  function show(){
+    stopT();if(qi>=list.length)return end();
+    const q=QUIZ[list[qi]];let opts=sh([q[1],q[2],q[3]]),t=20,locked=false;
+    $("app").innerHTML=bar()+`<div class="box"><div class="meta"><span>${mode==="fix"?"Xatolar ustida ishlash":"Savol"} ${qi+1}/${list.length}</span><span>To‘g‘ri: ${sc} · <span id="ts">20</span> s</span></div>
+    <div class="bar tm"><i id="tb" style="width:100%"></i></div><div class="say">${mascot(48,"happy")}<p class="q" style="margin:0">${q[0]}</p></div>
+    <div id="os">${opts.map(o=>`<button class="opt">${o}</button>`).join("")}</div><div class="fb" id="fb"></div><div class="row" id="nx"><button class="btn sec" id="hn" ${hint?"":"disabled"}>💡 Maslahat (1 marta)</button></div></div>`;
+    bindHome();
+    const ans=txt=>{
+      if(locked)return;locked=true;stopT();const ok=txt===q[1];
+      document.querySelectorAll(".opt").forEach(x=>{if(x.textContent===q[1])x.classList.add("right");else if(x.textContent===txt)x.classList.add("wrong")});
+      if(ok){combo++;sc++;let g=10+Math.min(combo-1,3)*2;if(20-t<=5){g+=3;fast++}S.xp+=g;
+        S.mist=S.mist.filter(x=>x!==list[qi]);if(mode==="fix")S.bd.fix=1;
+        $("fb").textContent=`Barakalla! +${g} XP`+(combo>1?` · 🔥 ${combo} ketma-ket`:"");$("fb").style.color="var(--ok)"}
+      else{combo=0;if(!S.mist.includes(list[qi]))S.mist.push(list[qi]);
+        $("fb").textContent=(txt===null?"Vaqt tugadi. ":"Noto‘g‘ri. ")+"To‘g‘ri javob: "+q[1];$("fb").style.color="var(--bad)"}
+      save();$("nx").innerHTML=`<button class="btn" id="n">${qi+1<list.length?"Keyingi savol":"Natijani ko‘rish"}</button>`;$("n").onclick=()=>{qi++;show()};
+    };
+    document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>ans(b.textContent));
+    $("hn").onclick=()=>{if(locked||!hint)return;hint=false;const w=[...document.querySelectorAll(".opt")].find(x=>x.textContent!==q[1]);if(w)w.style.display="none";$("hn").disabled=true};
+    tm=setInterval(()=>{t--;$("ts").textContent=t;$("tb").style.width=t/20*100+"%";if(t<=0)ans(null)},1000);
+  }
+  function end(){
+    if(mode==="quiz"){S.qb=Math.max(S.qb,sc);if(sc===list.length)S.bd.perfect=1;if(fast>=3)S.bd.fast=1;S.xp+=sc>=9?20:sc>=7?10:0}
+    save();const good=sc>=Math.ceil(list.length*.7);if(good)confetti();checkBadges();
+    const tr=sc>=9?{c:"#f5b301"}:sc>=7?{c:"#9aa3b5"}:sc>=5?{c:"#cd7f32"}:null;
+    $("app").innerHTML=bar()+`<div class="box c">${tr?medal(tr.c,110):mascot(90,"sad")}<div class="big">${sc}/${list.length}</div><p>${sc>=9?"Ajoyib! +20 XP bonus":sc>=7?"Juda yaxshi! +10 XP bonus":sc>=5?"Yaxshi, lekin yana mashq kerak.":"Avval kartochkalarni takrorlang."}</p>
+    <div class="row"><button class="btn" id="re">Qayta boshlash</button>${S.mist.length?`<button class="btn sec" id="mi">Xatolarni yechish</button>`:""}<button class="btn sec" id="h">Mukofotlar</button></div></div>`;
+    bindHome();$("re").onclick=()=>runQuiz(sh(QUIZ.map((_,i)=>i)).slice(0,10),"quiz");$("h").onclick=rewards;if($("mi"))$("mi").onclick=mistakes;
+  }
+  show();
+}
+function mistakes(){
+  stopT();
+  if(!S.mist.length){$("app").innerHTML=bar()+`<div class="box c">${mascot(90,"happy")}<h2>Xatolar daftari bo‘sh!</h2><p>Test yechganingizda noto‘g‘ri javoblar shu yerga yig‘iladi va qayta mashq qilinadi.</p><button class="btn" id="h">Bosh sahifa</button></div>`;bindHome();$("h").onclick=hub;return}
+  runQuiz(sh(S.mist),"fix");
+}
+// ---------- Orders ----------
+function orders(oi=0){
+  stopT();const [nm,hint,items]=ORDERS[oi];let placed=[],pool=sh(items),checked=false;
+  const draw=()=>{
+    $("app").innerHTML=bar()+`<div class="box"><div class="mini">${ORDERS.map((o,i)=>`<button class="${i===oi?"on":""}" data-i="${i}">${S.ord[i]?"✅ ":""}${o[0]}</button>`).join("")}</div><p class="q">${hint}</p>
+    <div class="slots">${items.map((_,i)=>{const p=placed[i];return `<div class="slot ${checked?(p===items[i]?"right":"wrong"):""}"><b>${i+1}</b>${p||""}</div>`}).join("")}</div>
+    <div class="pool">${pool.map((p,i)=>`<button class="chip" data-i="${i}" ${placed.includes(p)?"disabled":""}>${p}</button>`).join("")}</div><div class="fb" id="fb"></div>
+    <div class="row"><button class="btn sec" id="u">Qaytarish</button><button class="btn" id="k" ${placed.length<items.length?"disabled":""}>Tekshirish</button><button class="btn sec" id="r">Aralashtirish</button></div></div>`;
+    bindHome();
+    document.querySelectorAll(".mini button").forEach(b=>b.onclick=()=>orders(+b.dataset.i));
+    document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{if(checked)return;placed.push(pool[+b.dataset.i]);draw()});
+    $("u").onclick=()=>{checked=false;placed.pop();draw()};$("r").onclick=()=>orders(oi);
+    $("k").onclick=()=>{checked=true;draw();const n=placed.filter((p,i)=>p===items[i]).length,all=n===items.length;
+      if(all){const first=!S.ord[oi];S.ord[oi]=1;if(first){S.xp+=20;confetti()}save();checkBadges();$("fb").textContent="Barakalla! Hammasi to‘g‘ri."+(first?" +20 XP":"");$("fb").style.color="var(--ok)"}
+      else{$("fb").textContent=`${n}/${items.length} to‘g‘ri. Qaytarish tugmasi bilan tuzating.`;$("fb").style.color="var(--bad)"}};
+  };draw();
+}
+// ---------- Rewards ----------
+function rewards(){
+  stopT();const m=mastery(),tr=tier(m),d=new Date();
+  const ds=String(d.getDate()).padStart(2,"0")+"."+String(d.getMonth()+1).padStart(2,"0")+"."+d.getFullYear();
+  const weak=[["Kartochkalar",S.cb/14],["Test",S.qb/10],["Tartiblash",Object.keys(S.ord).length/3]].sort((a,b)=>a[1]-b[1])[0][0];
+  $("app").innerHTML=bar()+`<div class="box c">${medal(tr.c,120,tr.crown)}<h2>${tr.n}</h2><div class="big">${m}%</div><p>${tr.msg}</p>${m<90?`<p style="color:var(--mut)">Keyingi darajaga: eng zaif bo‘lim — «${weak}».</p>`:""}</div>
+  <h2 style="margin-top:16px">Nishonlar</h2><div class="badges">${BADGES.map(b=>`<div class="bd ${b[3]()?"":"off"}"><div class="e">${b[0]}</div><b>${b[1]}</b><br>${b[2]}</div>`).join("")}</div>
+  <div class="cert"><h2>SERTIFIKAT</h2><div>Ushbu sertifikat egasi</div><div class="nm">${S.sur} ${S.name}</div><div>«Uzluksiz ta’lim tizimida informatika» mavzusini</div><div style="font-size:30px;font-weight:700;color:#6c4ce0">${m}% o‘zlashtirdi</div>
+  <div style="margin:8px 0">${medal(tr.c,70,tr.crown)}</div><div><b>${tr.n}</b> · ${S.xp} XP · ${ds}</div></div>
+  <p class="c" style="color:var(--mut);font-size:14px">Sertifikatni ekran suratiga olib saqlang.</p>
+  <div class="row"><button class="btn" id="h">Mashqni davom ettirish</button><button class="btn sec" id="rs">Boshidan boshlash</button></div>`;
+  bindHome();$("h").onclick=hub;
+  $("rs").onclick=()=>{if(confirm("Barcha natijalar o‘chadi. Rostdan boshlaysizmi?")){S={name:"",sur:"",xp:0,cb:0,qb:0,ord:{},streak:0,last:"",bd:{},mist:[]};save();start()}};
+  if(m>=70)confetti();
+}
+if(S.name&&S.sur)hub();else start();
+</script>
+</body>
+</html>
